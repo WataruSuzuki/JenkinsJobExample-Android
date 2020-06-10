@@ -1,32 +1,18 @@
 package com.example.coroutinesandroid
 
 import android.os.Bundle
+import androidx.appcompat.app.AppCompatActivity
 import kotlinx.coroutines.*
 
-class MainActivity : ScopedAppActivity() {
+class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        launch {
-            setup()
+        GlobalScope.launch {
+            val example = ExampleCoroutine()
+            example.example()
         }
-    }
-
-    private suspend fun setup() {
-        val io = withContext(Dispatchers.IO) {
-            "(・∀・)"
-        }
-        println(io)
-        val main = withContext(Dispatchers.Main) {
-            "(・A・)"
-        }
-        println(main)
-        val deferred = async(Dispatchers.IO) {
-            Thread.sleep(3000)
-            "(・∀・)"
-        }
-        println(deferred.await())
     }
 }
