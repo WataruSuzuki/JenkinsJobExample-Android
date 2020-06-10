@@ -9,20 +9,24 @@ class MainActivity : ScopedAppActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        setup()
+        launch {
+            setup()
+        }
     }
 
-    private fun setup() {
-        launch {
-            val deferred = async(Dispatchers.IO) {
-                Thread.sleep(3000)
-                "(・∀・)"
-            }
-            println(deferred.await())
-            val main = withContext(Dispatchers.Main) {
-                "(・A・)"
-            }
-            println(main)
+    private suspend fun setup() {
+        val io = withContext(Dispatchers.IO) {
+            "(・∀・)"
         }
+        println(io)
+        val main = withContext(Dispatchers.Main) {
+            "(・A・)"
+        }
+        println(main)
+        val deferred = async(Dispatchers.IO) {
+            Thread.sleep(3000)
+            "(・∀・)"
+        }
+        println(deferred.await())
     }
 }
