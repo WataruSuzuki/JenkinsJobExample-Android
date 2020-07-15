@@ -16,7 +16,7 @@ class ExampleInstrumentedTest {
     @Test
     fun useExampleTest() = runBlocking {
         // Context of the app under test.
-        val result = ExampleCoroutine().example()
+        val result = ExampleCoroutine().simpleExample()
         assertEquals("(・∀・)", result)
     }
 }

@@ -12,7 +12,7 @@ class MainActivity : AppCompatActivity() {
 
         GlobalScope.launch {
             val example = ExampleCoroutine()
-            example.example()
+            example.simpleExample()
         }
     }
 }
