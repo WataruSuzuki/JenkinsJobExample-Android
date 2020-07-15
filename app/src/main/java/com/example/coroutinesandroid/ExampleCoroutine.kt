@@ -22,4 +22,12 @@ class ExampleCoroutine {
         return@withContext "(・∀・)"
     }
 
+    suspend fun exampleTimeout(timeMills: Long, sleep: Long = 0L): String? = withContext(Dispatchers.IO) {
+        val timeoutOrNull = withTimeoutOrNull(timeMills) {
+            delay(sleep)
+            "(・∀・)"
+        }
+        println(timeoutOrNull)
+        return@withContext timeoutOrNull
+    }
 }
